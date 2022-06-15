@@ -13,3 +13,8 @@ class CreateUserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.pop("autofocus", None)
+
+class NewProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['name', 'description', 'screenshot', 'repository_url', 'live_url']        
