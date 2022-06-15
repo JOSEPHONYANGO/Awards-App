@@ -69,3 +69,19 @@ def register_user(request):
 
     context = {'form': form, 'title': title}
     return render(request, 'auth/register.html', context)
+
+@login_required(login_url='login')
+def profile(request):
+
+    my_projects = Project.objects.all().filter(owner=request.user.profile)
+
+    if request.method == 'POST':
+        update_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if update_form.is_valid():
+            update_form.save()
+    else:
+        update_form = UpdateProfileForm()
+
+    context = {'update_form':update_form, 'my_projects':my_projects}
+    
+    return render(request, 'profile.html', context)
