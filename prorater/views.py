@@ -85,3 +85,23 @@ def profile(request):
     context = {'update_form':update_form, 'my_projects':my_projects}
     
     return render(request, 'profile.html', context)
+
+def project(request, project_id):
+
+    project = Project.objects.get(id=project_id)
+    reviews = Review.objects.all().filter(project=project)
+
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST, request.FILES)
+        if review_form.is_valid():
+            review_form.instance.reviewer = request.user.profile
+            review_form.instance.project = project
+            review_form.save()
+
+    else:
+        review_form = ReviewForm()
+
+
+    context = {'project': project, 'reviews':reviews, 'review_form':review_form}
+
+    return render(request, 'project.html', context)    
