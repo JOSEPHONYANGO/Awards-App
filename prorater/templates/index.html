@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+
+
+{% block content %}
+
+<!-- MODAL -->
+
+<form action="{% url 'index'%}" method="POST" enctype="multipart/form-data" id="newProjectForm">
+<div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase" id="newProjectModalLabel"> New Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% csrf_token %}
+                {% bootstrap_form upload_form%}
+                <button type="submit" class="btn btn-primary w-100">POST</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- END OF MODAL -->
+
+<div class="container my-5 p-5 content_wrapper">
+    <div class="searchform my-2">
+        <form action="{% url 'index'%}" method="POST" class="d-flex">
+            <input class="form-control" type="text" name="search" id="search" placeholder="Search for a project...">
+            <button class="btn btn-primary" type="submit"><i class='bx bx-search'></i></button>
+        </form>
+    </div>
