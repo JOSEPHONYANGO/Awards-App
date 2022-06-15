@@ -12,3 +12,23 @@ from .serializer import ProfileSerializer, ProjectsSerializer
 from wwwrate import serializer
 
 # Create your views here.
+
+def index(request):
+
+    projects = Project.objects.all()
+    if request.method == 'POST':
+        upload_form = NewProjectForm(request.POST, request.FILES)
+        if upload_form.is_valid():
+            upload_form.instance.owner = request.user.profile
+            upload_form.save()
+
+            return redirect('index')
+
+    else:
+        upload_form = NewProjectForm()
+
+
+
+    context = {'upload_form': upload_form, 'projects':projects}
+    return render(request, 'index.html', context)
+
