@@ -52,3 +52,20 @@ def login_user(request):
 
     context = {}
     return render(request, 'auth/login.html', context)
+
+def register_user(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+
+    else:
+        form = CreateUserForm()
+        title = 'New Account'
+
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('login')
+
+    context = {'form': form, 'title': title}
+    return render(request, 'auth/register.html', context)
