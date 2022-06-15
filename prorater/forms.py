@@ -17,4 +17,9 @@ class CreateUserForm(UserCreationForm):
 class NewProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['name', 'description', 'screenshot', 'repository_url', 'live_url']        
+        fields = ['name', 'description', 'screenshot', 'repository_url', 'live_url'] 
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']               
