@@ -22,4 +22,9 @@ class NewProjectForm(forms.ModelForm):
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user']               
+        exclude = ['user']
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        exclude = ['reviewer', 'project']                       
