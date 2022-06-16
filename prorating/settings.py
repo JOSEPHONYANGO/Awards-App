@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'prorater',
+    'cloudinary',
     'bootstrap5',
+    'mathfilters',
+    
 
 ]
 
@@ -84,7 +91,11 @@ DATABASES = {
     'PASSWORD':'Access',
     }
 }
-    
+cloudinary.config(
+   cloud_name = 'bishopjoe',
+   api_key = '535635979348921',
+   api_secret = 'z5jAymBVmxJHFFt5E8ETWvYEkQM' 
+)    
 
 
 

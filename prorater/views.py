@@ -32,6 +32,10 @@ def index(request):
     context = {'upload_form': upload_form, 'projects':projects}
     return render(request, 'index.html', context)
 
+def logout_user(request):
+    logout(request)
+    return redirect('login')    
+
 def login_user(request):
     if request.user.is_authenticated:
         return redirect('/')
